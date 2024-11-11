@@ -37,7 +37,7 @@ void	ft_rev_int_tab(int *tab, int size)
 		count++;
 	}
 }
-/*
+
 int main(void)
 {
 	int my_numbers[] =  {1, 2, 3, 4, 5, 6};
@@ -52,4 +52,4 @@ int main(void)
 	printf("\n");
 
 	return 0;
-}*/
+}
