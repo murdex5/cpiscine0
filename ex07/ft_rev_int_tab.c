@@ -9,35 +9,25 @@
 /*   Updated: 2024/11/11 12:11:05 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 
 void	ft_rev_int_tab(int *tab, int size)
 {
-	int	temp_arr_size;
-	int	count;
-	int	fix_size;
+	int	start;
+	int	end;
+	int	temp;
 
-	fix_size = size;
-
-	int	temp_arr[fix_size];
-
-	count = 0;
-	temp_arr_size = size - 1;
-	while (count < size)
+	start = 0;
+	end = size - 1;
+	while (start < end)
 	{
-		temp_arr[count] = tab[temp_arr_size];
-		count++;
-		temp_arr_size--;
-	}
-	count = 0;
-	while (count < size)
-	{
-		tab[count] = temp_arr[count];
-		temp_arr_size++;
-		count++;
+		temp = tab[start];
+		tab[start] = tab[end];
+		tab[end] = temp;
+		start++;
+		end--;
 	}
 }
-
+/*
 int main(void)
 {
 	int my_numbers[] =  {1, 2, 3, 4, 5, 6};
@@ -52,4 +42,4 @@ int main(void)
 	printf("\n");
 
 	return 0;
-}
+}*/
