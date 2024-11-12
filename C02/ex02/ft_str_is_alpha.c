@@ -6,19 +6,21 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:39:45 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/12 12:17:30 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:54:15 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
+
 int	ft_str_is_alpha(char *str)
 {
 	int	i;
 	int	c;
+	int	l;
 
 	c = 0;
-	while (str[c] != '\0')
-	{	
-		i = 0;
+	l = 0;
+	while (str[c] != '\0' && l == 0)
+	{
 		if ((str[c] >= 'A' && str[c] <= 'Z') \
 			|| (str[c] >= 'a' && str[c] <= 'z'))
 		{
@@ -27,6 +29,7 @@ int	ft_str_is_alpha(char *str)
 		else
 		{
 			i = 0;
+			l = 1;
 		}
 		c++;
 	}
@@ -36,7 +39,7 @@ int	ft_str_is_alpha(char *str)
 	}
 	return (i);
 }
-
+/*
 int main(int argc, char **argv)
 {
 	int	i;
@@ -49,4 +52,4 @@ int main(int argc, char **argv)
 		i = ft_str_is_alpha(argv[1]);
 		printf("%d\n", i);
 	}	return 0;
-}
+}*/
