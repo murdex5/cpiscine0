@@ -6,7 +6,7 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 17:07:38 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/12 17:57:13 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:57:08 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -34,7 +34,7 @@ int	ft_str_is_numeric(char *str)
 	}
 	if (str[0] == '\0')
 	{
-		i = 0;
+		i = 1;
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:12:49 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/13 12:40:48 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:37:41 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 char	*ft_strcapitalize(char *str)
 {
-	int	c;
+	unsigned int	i;
 
-	c = 0;
-	if (str[c] >= 'a' && str[c] <= 'z')
+	if (str[0] != '\0' && str[0] >= 'a' && str[0] <= 'z')
+		str[0] -= 32;
+	i = 1;
+	while (str[i] != '\0')
 	{
-		str[c] = str[c] - 32;
-	}
-	c++;
-	while (str[c] != '\0')
-	{
-		if ((str[c - 1] == ' ' || ((str[c - 1] < 'A' || str[c - 1] > 'Z')
-					&& (str[c - 1] < 'a' || str[c - 1] > 'z')))
-			&& (str[c] >= 'a' && str[c] <= 'z')
-			&& !(str[c - 1] >= '0' && str[c - 1] <= '9'))
+		if (((str[i] >= 'a' && str[i] <= 'z')
+				|| (str[i] >= 'A' && str[i] <= 'Z'))
+			&& (str[i - 1] < '0'
+				|| (str[i - 1] > '9' && str[i - 1] < 'A')
+				|| (str[i - 1] > 'Z' && str[i - 1] < 'a')
+				|| str[i - 1] > 'z'))
 		{
-			str[c] = str[c] - 32;
+			if (str[i] >= 'a' && str[i] <= 'z')
+				str[i] -= 32;
 		}
-		else if (str[c] >= 'A' && str[c] <= 'Z')
-		{
-			str[c] = str[c] + 32;
-		}
-		c++;
+		else if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] += 32;
+		++i;
 	}
 	return (str);
 }
