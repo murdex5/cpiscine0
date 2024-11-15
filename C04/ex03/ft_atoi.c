@@ -6,25 +6,51 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:51:36 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/14 18:40:17 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:45:52 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
+#include <limits.h>
 
-char	*ft_strcat(char *dest, char src)
+int	ft_atoi(char *str)
 {
-	int	l;
+	int	result;
+	int	sign;
+	size_t	cur;
+	
 
-	l = 0;
-	while (dest[l] != '\0')
-		l++;
-	if (src == '\0')
-		return (dest);
+	result = 0;
+	sign = 1;
+	cur = 0;
+	while ((str[cur] >= 9 && str[cur] <= 13) || str[cur] == 20)
+	{
+		cur++;
+	}
 
-	dest[l + 1] = src;
-	dest[l + 2] = '\0';
-	return (dest);
+	if (str[cur] == '-' || str[cur] == '+')
+	{
+		sign = (str[cur] == '-') ? -1 : 1;
+		cur++;
+	}
+
+	while (str[cur] >= '0' && str[cur] <= '9')
+	{
+		if (result > (INT_MAX - (str[cur] - '0')) / 10)
+			return (sign == -1 ? INT_MIN : INT_MAX);
+
+		result = result * 10 + (str[cur] - '0');
+		cur++;
+	}
+	return (result * sign);
 }
 
+int main(void)
+{
+	int	i;
+	char *hell;
 
-int	ft_atoi(
+	hell = "Hello --+442121574";
+	i = ft_atoi(hell);
+	printf("%d\n", i);
+	return 0;
+}
