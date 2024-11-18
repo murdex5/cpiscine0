@@ -6,51 +6,54 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:51:36 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/15 12:45:52 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:04:12 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
-#include <limits.h>
+#include <stdlib.h>
 
 int	ft_atoi(char *str)
 {
+	int	c;
 	int	result;
 	int	sign;
-	size_t	cur;
-	
 
+	c = 0;
 	result = 0;
 	sign = 1;
-	cur = 0;
-	while ((str[cur] >= 9 && str[cur] <= 13) || str[cur] == 20)
+	while ((str[c] >= 9 && str[c] <= 13) || str[c] == ' ')
+		c++;
+	while (str[c] == '-' || str[c] == '+')
 	{
-		cur++;
-	}
-
-	if (str[cur] == '-' || str[cur] == '+')
+		if (str[c] == '-')
+		{
+			sign = -sign;
+		}
+		c++;
+	
+	while (str[c] >= '0' && str[c] <= '9')
 	{
-		sign = (str[cur] == '-') ? -1 : 1;
-		cur++;
-	}
-
-	while (str[cur] >= '0' && str[cur] <= '9')
-	{
-		if (result > (INT_MAX - (str[cur] - '0')) / 10)
-			return (sign == -1 ? INT_MIN : INT_MAX);
-
-		result = result * 10 + (str[cur] - '0');
-		cur++;
+		result = result * 10 + (str[c] - '0');
+		c++;
 	}
 	return (result * sign);
 }
-
-int main(void)
+/*
+int main(int argc, char *argv[])
 {
 	int	i;
-	char *hell;
-
-	hell = "Hello --+442121574";
-	i = ft_atoi(hell);
+	int	l;
+	if (argc != 2)
+	{
+		printf("No!!!!!!!!!!\n");
+		return 1;
+	}
+	else
+	{
+		i = ft_atoi(argv[1]);
+		l = atoi(argv[1]);
+	}
 	printf("%d\n", i);
+	printf("%d\n", l);
 	return 0;
-}
+}*/
