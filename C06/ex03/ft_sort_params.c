@@ -6,7 +6,7 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:12:21 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/19 16:59:04 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:48:12 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -23,18 +23,19 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	ft_swap(char *s1, char *s2)
+void	ft_swap(char **s1, char **s2)
 {
 	char	*temp;
-	temp = s1;
-	s1 = s2;
-	s2 = temp;
+
+	temp = *s1;
+	*s1 = *s2;
+	*s2 = temp;
 }
 
 void	ft_putstr(char *str)
 {
 	int	c;
-	
+
 	c = 0;
 	while (str[c] != '\0')
 	{
@@ -53,7 +54,7 @@ void	sort_params(int argc, char *argv[])
 
 	pass = 0;
 	l = 0;
-	while (pass >  argc - 1 && l == 0)
+	while (pass < argc - 1 && l == 0)
 	{
 		swapped = 0;
 		i = 1;
@@ -61,16 +62,27 @@ void	sort_params(int argc, char *argv[])
 		{
 			if (ft_strcmp(argv[i], argv[i + 1]) > 0)
 			{
-				ft_swap(argv[i], argv[i + 1]);
-				swapped = 0;
+				ft_swap(&argv[i], &argv[i + 1]);
+				swapped = 1;
 			}
 			i++;
 		}
-		if (swapped == 1)
+		if (!swapped)
 			l = 1;
+		pass++;
+	}
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
+	int	i;
+
+	i = 1;
+	sort_params(argc - 1, argv);
+	while (i < argc)
+	{
+		ft_putstr(argv[i]);
+		i++;
+	}
 	return (0);
 }
