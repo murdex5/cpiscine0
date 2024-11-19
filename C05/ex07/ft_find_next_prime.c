@@ -45,10 +45,10 @@ int	ft_find_next_prime(int nb)
 	}
 	return (nb);
 }
-/*
+
 int main (void)
 {
 	int l = ft_find_next_prime(79);
 	printf("%d\n", l);
 	return l;
-}*/
+}

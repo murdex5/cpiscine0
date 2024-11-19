@@ -20,7 +20,7 @@ int	ft_recursive_power(int nb, int power)
 		return (1);
 	return (nb * ft_recursive_power(nb, power - 1));
 }
-/*
+
 int main(void)
 {
 	int l = ft_recursive_power(3, 10);
