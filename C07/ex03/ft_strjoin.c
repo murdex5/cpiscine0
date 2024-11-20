@@ -6,18 +6,91 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:09 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/20 15:44:54 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:29:44 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
 #include <stdlib.h>
 
-char	*ft_strjoin(int size, char **strs, char *sep)
+int	ft_strlen(char *str)
+{
+	int	c;
+	
+	c = 0;
+	if (!str == NULL)
+		return (0);
+	while (str[c] != '\0')
+	{
+		c++;
+	}
+	return (c);
+}
+
+char	*ft_strdup(char *str)
+{
+	int	len;
+	char	*temp;
+
+	if (str == NULL)
+		return (NULL);
+	len = ft_strlen(str);
+	temp = (char *)mallooc(len * sizeof(char));
+	len = 0;
+	while (str[len] != '\0')
+	{
+		temp[len] = str[len];
+		len++;
+	}
+	temp[len] = '\0';
+	return (temp);
+}
+
+int	ft_mem_alloc(int size, char **strs)
 {
 	int	i;
-	int	j;
 	int	n;
+	int	len;
 
+	n = 0;
+	len = 0;
+	while (n < size)
+	{
+		if (strs[n] != NULL)
+		{
+			i = 0;
+			while (strs[n][i] != '\0')
+			{
+				len++;
+				i++;
+			}
+		}
+		n++;
+	}
+	return (len);
+}
+
+char	*ft_strjoin(int size, char **strs, char *sep)
+{
+	int	total_len;
+	int	sep_len;
+	int	n;
+	int	k;
+	int	i;
+i
+	n = 0;
+	totla_len = 0;
+	sep_len = 0;
+	if (size == 0)
+	{
+		return (ft_strdup("");
+	}
+	while (n < size)
+	{
+		total_len += ft_strlen(strs[n]);
+		if (n < size - 1)
+			total_len += sep_len;
+		n++;
+	}
 }
 
 int main() {
