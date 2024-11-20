@@ -6,7 +6,7 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:09 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/20 17:29:44 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:12:35 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -15,9 +15,9 @@
 int	ft_strlen(char *str)
 {
 	int	c;
-	
+
 	c = 0;
-	if (!str == NULL)
+	if (str == NULL)
 		return (0);
 	while (str[c] != '\0')
 	{
@@ -28,13 +28,13 @@ int	ft_strlen(char *str)
 
 char	*ft_strdup(char *str)
 {
-	int	len;
+	int		len;
 	char	*temp;
 
 	if (str == NULL)
 		return (NULL);
 	len = ft_strlen(str);
-	temp = (char *)mallooc(len * sizeof(char));
+	temp = (char *)malloc(len * sizeof(char));
 	len = 0;
 	while (str[len] != '\0')
 	{
@@ -45,45 +45,15 @@ char	*ft_strdup(char *str)
 	return (temp);
 }
 
-int	ft_mem_alloc(int size, char **strs)
+char	*ft_mem_alloc(int size, char **strs, char *sep, char *str)
 {
-	int	i;
 	int	n;
-	int	len;
-
-	n = 0;
-	len = 0;
-	while (n < size)
-	{
-		if (strs[n] != NULL)
-		{
-			i = 0;
-			while (strs[n][i] != '\0')
-			{
-				len++;
-				i++;
-			}
-		}
-		n++;
-	}
-	return (len);
-}
-
-char	*ft_strjoin(int size, char **strs, char *sep)
-{
 	int	total_len;
 	int	sep_len;
-	int	n;
-	int	k;
-	int	i;
-i
+
 	n = 0;
-	totla_len = 0;
-	sep_len = 0;
-	if (size == 0)
-	{
-		return (ft_strdup("");
-	}
+	total_len = 0;
+	sep_len = ft_strlen(sep);
 	while (n < size)
 	{
 		total_len += ft_strlen(strs[n]);
@@ -91,8 +61,49 @@ i
 			total_len += sep_len;
 		n++;
 	}
+	str = (char *)malloc(total_len + 1);
+	if (!str)
+		return (NULL);
+	return (str);
 }
 
+void	join_str(int size, char **strs, char *str, char *sep)
+{
+	int	n;
+	int	i;
+	int	k;
+
+	n = 0;
+	k = 0;
+	while (n < size)
+	{
+		i = 0;
+		while (strs[n][i] != '\0')
+			str[k++] = strs[n][i++];
+		if (n < size - 1)
+		{
+			i = 0;
+			while (sep[i])
+				str[k++] = sep[i++];
+		}
+		n++;
+	}
+	str[k] = '\0';
+}
+
+char	*ft_strjoin(int size, char **strs, char *sep)
+{
+	char	*str;
+	char	*temp;
+
+	if (size == 0)
+		return (ft_strdup(""));
+	temp = NULL;
+	str = ft_mem_alloc(size, strs, sep, temp);
+	join_str(size, strs, str, sep);
+	return (str);
+}
+/*
 int main() {
     // Test Case 1: Normal case with multiple strings
     char *strs1[] = {"Hello", "World", "C", "Programming"};
@@ -141,4 +152,4 @@ int main() {
 
     return 0;
 }
-
+*/
