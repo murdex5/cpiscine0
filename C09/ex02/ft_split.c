@@ -6,7 +6,7 @@
 /*   By: malshapraboth <malshapraboth@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:32:14 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/24 20:26:56 by malshaprabo      ###   ########.fr       */
+/*   Updated: 2024/11/24 20:47:43 by malshaprabo      ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -144,8 +144,8 @@ int	main(void)
 	int l= 0;
 	for (int i = 0; strarr[i]; i++)
 	{
-		 printf("%s\n", strarr[i]);
-		 l++;
+		printf("%s\n", strarr[i]);
+		l++;
 	}
 
 	int i = 0;
