@@ -1,17 +1,17 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: malshapraboth <malshapraboth@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:32:14 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/23 19:47:00 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:06:04 by malshaprabo      ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-#include <stdio.h>
-#include <stdlib.h>
+/******************************************************************************/
 
+#include <stdlib.h>
+#include <stdio.h>
 char	*ft_getstr(int start, int end, char *str)
 {
 	int	i;
@@ -19,7 +19,7 @@ char	*ft_getstr(int start, int end, char *str)
 	char	*temp;
 
 	len = end - start;
-	temp = (char *)malloc(len + 1);
+	temp = (char *)malloc(sizeof(char) *(len + 1));
 	if (!temp)
 		return (NULL);
 	i = 0;
@@ -37,27 +37,27 @@ int	ft_get_mem(char *str, char *charset)
 	int	l;
 	int	c;
 	int	i;
-	int	flag;
+	//int	flag;
 
 	if (!(str) || !(charset))
 		return (0);
 	i = 0;
-	flag = 0;
+	//flag = 0;
 	l = 0;
-	while (str[i] != '0')
+	while (str[i] != '\0')
 	{
 		c = 0;
-		while (charset[c] != '\0' && flag == 0)
+		while (charset[c] != '\0' /*&& flag == 0*/)
 		{
 			if (str[i] == charset[c])
 			{
 				l++;
-				flag = 1;
+				//flag = 1;
+				break;
 			}
-			break;
 			c++;
 		}
-		flag = 0;
+		//flag = 0;
 		i++;
 	}
 	return (l);
@@ -77,7 +77,7 @@ void	join_indexes(char **strarr, char *str, char *charset, int len)
 	start = 0;
 	if (!(strarr) || !(str) || !(charset))
 		strarr = NULL;
-	while (str[c] != '\0' && i < len)
+	while (str[c] != '\0' && i < len - 1)
 	{
 		j = 0;
 		while (charset[j] != '\0')
@@ -86,15 +86,21 @@ void	join_indexes(char **strarr, char *str, char *charset, int len)
 			if (str[c] == charset[j])
 			{
 				strarr[i] = ft_getstr(start, c, str);
-				start = c+1;
+				start = c + 1;
 				i++;
+				break;
 			//	printf("shit happens\n");
 			}
-			break;
 			j++;
 		}
 		c++;
 	}
+	if (start <= c)
+	{
+		strarr[i] = ft_getstr(start, c, str);
+		i++;
+	}
+	strarr[i] = NULL;
 }
 
 char	**ft_split(char *str, char *charset)
@@ -128,6 +134,6 @@ int	main(void)
 		free(strarr[i]);
 		i++;
 	}
-	free(strarr);
+	//free(strarr);
 	return 0;
 }
