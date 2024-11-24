@@ -6,15 +6,34 @@
 /*   By: malshapraboth <malshapraboth@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:32:14 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/24 20:06:04 by malshaprabo      ###   ########.fr       */
+/*   Updated: 2024/11/24 20:26:56 by malshaprabo      ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include <stdlib.h>
 #include <stdio.h>
-char	*ft_getstr(int start, int end, char *str)
+
+void	ft_strncpy(char *dest, char *src, int size)
 {
 	int	i;
+	if (!dest || !src || size <= 0)
+		return;
+	i = 0;
+	while (src && i < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < size)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+}
+
+char	*ft_getstr(int start, int end, char *str)
+{
+	//int	i;
 	int	len;
 	char	*temp;
 
@@ -22,13 +41,14 @@ char	*ft_getstr(int start, int end, char *str)
 	temp = (char *)malloc(sizeof(char) *(len + 1));
 	if (!temp)
 		return (NULL);
-	i = 0;
+	/*i = 0;
 	while (i < len)
 	{
 		temp[i] = str[start + i];
 		i++;
 	}
-	temp[i] = '\0';
+	temp[i] = '\0';*/
+	ft_strncpy(temp, &str[start], len);
 	return (temp);
 }
 
@@ -76,7 +96,7 @@ void	join_indexes(char **strarr, char *str, char *charset, int len)
 	c = 0;
 	start = 0;
 	if (!(strarr) || !(str) || !(charset))
-		strarr = NULL;
+		return;
 	while (str[c] != '\0' && i < len - 1)
 	{
 		j = 0;
@@ -129,7 +149,7 @@ int	main(void)
 	}
 
 	int i = 0;
-	while (i < l)
+	while (strarr[i] != NULL)
 	{
 		free(strarr[i]);
 		i++;
