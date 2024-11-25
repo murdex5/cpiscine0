@@ -3,36 +3,30 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Iincludes/include
 
 # Directories
-SRCDIR = .
-OBJDIR = objs
+SRCDIR = srcs
+OBJDIR = srcs
 INCDIR = includes/include
 
 CFILES = $(SRCDIR)/ft_putchar.c $(SRCDIR)/ft_swap.c $(SRCDIR)/ft_putstr.c $(SRCDIR)/ft_strlen.c $(SRCDIR)/ft_strcmp.c
 
-OFILES = $(CFILES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OFILES = $(CFILES:%.c=%.o)
 
 NAME = libft.a
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	@echo "Creating library $(NAME)"
 	ar rcs $(NAME) $(OFILES)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
-	@echo "Compiling $<"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Removing object files"
-	rm -rf $(OBJDIR)
+	rm -r $(OFILES)
 
 fclean: clean
-	@echo "Removing library $(NAME)"
 	rm -f $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
-

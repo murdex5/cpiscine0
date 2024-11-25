@@ -6,7 +6,7 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:09:05 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/25 19:59:43 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:08:05 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -39,15 +39,17 @@ int	ft_strlen(char *str)
 char	*ft_strdup(char *src, int start, int end)
 {
 	int	i;
+	int	len;
 	char	*dest;
 
 	if (!src)
 		return (NULL);
 	i = 0;
-	dest = malloc(sizeof(char) * (end - start + 2));
+	len = end - start;
+	dest = malloc(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
-	while (start <= end)
+	while (start < end)
 	{
 		dest[i] = src[start];
 		i++;
@@ -94,23 +96,23 @@ void	ft_join_index(char **strarr, char *str, char *charset)
 	start = 0;
 	while (str[i] != '\0')
 	{
-		if (!issep(str[i], charset))
+		if (!issep(str[i], charset) || !issep(str[i+1], charset))
 		{
-			start = i;
 			while (!issep(str[i], charset) && str[i] != '\0')
 			{
 				i++;
 			}
-			strarr[k] = ft_strdup(str, start, i - 1);
+			strarr[k] = ft_strdup(str, start, i);
 			if(!strarr[k])
 				return;
 			k++;
+			start = i + 1;
 			word_count++;
 		}
 		i++;
 	}
 	if (word_count > 0)
-		strarr[k] = ft_strdup(str, start, i - 1);
+		strarr[k] = ft_strdup(str, start, i);
 	strarr[k] = NULL;
 }
 
