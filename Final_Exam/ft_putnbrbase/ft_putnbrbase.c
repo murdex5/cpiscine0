@@ -1,21 +1,20 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_putnbrbase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: malshapraboth <malshapraboth@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 11:14:16 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/28 11:55:00 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/29 00:03:44 by malshaprabo      ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include <unistd.h>
 
 void	ft_putnbr_base(int nbr, char *base)
 {
 	int	base_len = 0;
-	int	i;
 	char	c;
 	int	min_int = -2147483648;
 
@@ -49,7 +48,8 @@ void	ft_putnbr_base(int nbr, char *base)
 int main(void)
 {
 	char *base = "0123456789ABCDEF";
-	int	num = -2147483648;
+	int	num = 20;
 	ft_putnbr_base(num, base);
+	write(1, "\n", 1);
 	return 0;
 }
