@@ -6,19 +6,11 @@
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:25:10 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/28 19:31:16 by kadferna         ###   ########.fr       */
+/*   Updated: 2024/11/28 19:33:29 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
-int	ft_strlen(char *str)
-{
-	int c = 0;
-	while (str[c] != '\0')
-		c++;
-	return c;
-}
 
 void	ft_putstr(char *str)
 {
