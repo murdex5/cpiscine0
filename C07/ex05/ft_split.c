@@ -91,6 +91,7 @@ void	ft_join_index(char **strarr, char *str, char *charset)
 			if (!strarr[k])
 				return ;
 			k++;
+			word_count++;
 		}
 		i++;
 	}

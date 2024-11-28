@@ -1,31 +1,30 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iincludes/include
+CFLAGS = -Wall -Wextra -Werror
 
 # Directories
-SRCDIR = srcs
-OBJDIR = srcs
-INCDIR = includes/include
+SRCDIR = srcs/
+INCDIR = includes/
 
 CFILES = $(SRCDIR)/ft_putchar.c $(SRCDIR)/ft_swap.c $(SRCDIR)/ft_putstr.c $(SRCDIR)/ft_strlen.c $(SRCDIR)/ft_strcmp.c
 
-OFILES = $(CFILES:%.c=%.o)
+OFILES = $(CFILES:$(SRCDIR)%.c=$(SRCDIR)%.o)
 
 NAME = libft.a
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	ar rcs $@ $^
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -I $(INCDIR) -o $@
 
 clean:
-	rm -r $(OFILES)
+	rm -rf $(OFILES)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

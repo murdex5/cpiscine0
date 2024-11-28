@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   print_bits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 16:52:53 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/21 17:05:43 by kadferna         ###   ########.fr       */
+/*   Created: 2024/11/28 12:18:00 by kadferna          #+#    #+#             */
+/*   Updated: 2024/11/28 14:39:36 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include <unistd.h>
+#include <stdio.h>
+void	print_bits(unsigned int octec)
 {
-	int	i;
+	int i = 7;
+	char c;
+	while (i >= 0)
+	{
+		c = ((octec >> i) & 1) + '0';
+		write(1, &c, 1);
+		i--;
+	}
+	write(1, "\n", 1);
+}
 
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+int main(void)
+{
+	print_bits(900);
 }

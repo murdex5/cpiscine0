@@ -5,64 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kadferna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 17:09:05 by kadferna          #+#    #+#             */
-/*   Updated: 2024/11/25 19:08:05 by kadferna         ###   ########.fr       */
+/*   Created: 2024/11/26 12:39:03 by kadferna          #+#    #+#             */
+/*   Updated: 2024/11/26 13:57:39 by kadferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 int	issep(char c, char *charset)
 {
-	int	i;
-
-	i = 0;
+	int	i = 0;
 	while (charset[i] != '\0')
 	{
 		if (c == charset[i])
-			return (1);
+			return 1;
 		i++;
 	}
-	return (0);
+	return 0;
 }
 
-int	ft_strlen(char *str)
+char	*ft_strdup(char	*src, int start, int end)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(char *src, int start, int end)
-{
-	int	i;
-	int	len;
-	char	*dest;
-
+	if (start >= end)
+		return NULL;
 	if (!src)
-		return (NULL);
-	i = 0;
-	len = end - start;
-	dest = malloc(sizeof(char) * (len + 1));
+		return NULL;
+	char	*dest = (char *)malloc(sizeof(char *) * (end - start + 2));
 	if (!dest)
-		return (NULL);
+		return NULL;
+	int	i = 0;
 	while (start < end)
 	{
 		dest[i] = src[start];
-		i++;
 		start++;
+		i++;
 	}
 	dest[i] = '\0';
 	return (dest);
 }
 
-int	ft_count_words(char *str, char *charset)
+
+int	count_words(char *str, char *charset)
 {
-	int	word_count;
 	int	i;
+	int	word_count;
 
 	i = 0;
 	word_count = 0;
@@ -70,11 +57,8 @@ int	ft_count_words(char *str, char *charset)
 	{
 		if (!issep(str[i], charset))
 		{
-			while (!issep(str[i], charset) && str[i] != '\0')
-			{
-				//printf("%c\n", str[i]);
+			while (!issep(str[i], charset))
 				i++;
-			}
 			word_count++;
 		}
 		i++;
@@ -82,65 +66,60 @@ int	ft_count_words(char *str, char *charset)
 	return (word_count);
 }
 
-
-void	ft_join_index(char **strarr, char *str, char *charset)
+void	sep_words(char	*str, char *charset, char **strarr, int len)
 {
 	int	i;
 	int	k;
-	int	word_count;
 	int	start;
 
 	i = 0;
-	k = 0;
-	word_count = 0;
 	start = 0;
+	k = 0;
 	while (str[i] != '\0')
 	{
-		if (!issep(str[i], charset) || !issep(str[i+1], charset))
+		if (!issep(str[i], charset))
 		{
-			while (!issep(str[i], charset) && str[i] != '\0')
-			{
+			start = i;
+			while(!issep(str[i], charset) && str[i] != '\0')
 				i++;
+			//printf("su\n");
+			if (k < len)
+			{
+				strarr[k] = ft_strdup(str, start, i);
+				if (!strarr[k])
+					return;
+				k++;
 			}
-			strarr[k] = ft_strdup(str, start, i);
-			if(!strarr[k])
-				return;
-			k++;
-			start = i + 1;
-			word_count++;
 		}
 		i++;
 	}
-	if (word_count > 0)
-		strarr[k] = ft_strdup(str, start, i);
 	strarr[k] = NULL;
 }
 
 char	**ft_split(char *str, char *charset)
 {
 	char	**strarr;
-	int	len;
-
-	len = ft_count_words(str, charset);
-	strarr =malloc(sizeof(char *) * (len + 1));
+	if (!str)
+		return NULL;
+	int	len = count_words(str, charset);
+	strarr = malloc(sizeof(char *) * (len + 1));
 	if (!strarr)
-		return (NULL);
-	ft_join_index(strarr, str, charset);
-	return (strarr);
+		return NULL;
+	sep_words(str, charset, strarr, len);
+	return strarr;
 }
 
 int	main(void)
 {
-	char	*str = "Hello World, how are you?";
-	char	*charset = " ,?";
+	char	*str = "Hello how are you, i am fine. thank you! so the thing is that bkafh?";
+	char	*charset = " .";
 	char	**strarr;
-	int	i = 0;
 
 	strarr = ft_split(str, charset);
+	int	i = 0;
 	while (strarr[i] != NULL)
 	{
 		printf("%s\n", strarr[i]);
-		//printf("%d\n", i);
 		i++;
 	}
 	free(strarr);
